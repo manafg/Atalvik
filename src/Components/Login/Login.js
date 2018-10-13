@@ -28,10 +28,10 @@ import {updateUser} from '../../Actions/user-action';
   onUpdateUser = e => {
     e.preventDefault();
     this.props.onUpdateUser(this.state.email)
+    window.location.assign('/Home')
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="Login">
         <form onSubmit={this.onUpdateUser}>
