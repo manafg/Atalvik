@@ -3,20 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {combineReducers, createStore } from 'redux';
+import thunk from 'redux-thunk'
+import {applyMiddleware, compose ,combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {initialState} from './initial-state';
-import {userReducer} from './Reducers/user-reducer'
+import {userReducer} from './Reducers/user-reducer';
+import {BTCreducer} from './Reducers/BTC-reducer'
 
 const combinedReducers = combineReducers({
     user : userReducer,
+    BTC: BTCreducer
 });
 
+const storeEnhancer = compose(
+    applyMiddleware(thunk),
+)
 
 const store = createStore(
     combinedReducers, 
     initialState, 
-    window.devtoolsextension && window.devtoolsextension()); 
+    storeEnhancer,
+ ); 
 
 ReactDOM.render(
 <Provider store={store}>
